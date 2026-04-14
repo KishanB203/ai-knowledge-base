@@ -5,7 +5,7 @@ import { verifyDatabaseConnection } from "./config/db.js";
 async function startServer() {
   try {
     await verifyDatabaseConnection();
-    console.log("MySQL connection verified.");
+    console.info("MySQL connection verified.");
   } catch (error) {
     console.warn("MySQL connection could not be verified during startup.");
     console.warn(error);
@@ -14,7 +14,7 @@ async function startServer() {
   const app = createApp();
 
   app.listen(env.port, () => {
-    console.log(`Knowledge Base API listening on port ${env.port}`);
+    console.info(`Knowledge Base API listening on port ${env.port}`);
   });
 }
 
