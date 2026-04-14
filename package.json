@@ -1,0 +1,15 @@
+{
+  "name": "ai-knowledge-base",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "install:all": "npm.cmd install --workspaces",
+    "dev:frontend": "npm.cmd run dev --workspace frontend",
+    "dev:backend": "npm.cmd run dev --workspace backend",
+    "build": "npm.cmd run build --workspace frontend && npm.cmd run build --workspace backend"
+  }
+}
