@@ -88,3 +88,22 @@ npm run dev --workspace backend
 - The frontend follows the required modular folder layout.
 - Development servers may be started for testing, but should be stopped before
   finishing a task.
+
+## Development Login Accounts
+
+The authentication slice includes seeded in-memory users for local development:
+
+```text
+Admin
+Username: admin
+Email: admin@knowledgebase.local
+Password: Admin@123
+
+Normal User
+Username: normaluser
+Email: normal.user@knowledgebase.local
+Password: User@123
+```
+
+The planned MySQL `users` table shape is documented in
+`backend/src/infrastructure/orm/typeorm/schema.sql`.

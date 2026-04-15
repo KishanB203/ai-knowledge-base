@@ -7,6 +7,7 @@ export interface AppConfig {
   port: number;
   corsOrigin: string;
   database: DatabaseConfig;
+  auth: AuthConfig;
 }
 
 export interface DatabaseConfig {
@@ -15,6 +16,11 @@ export interface DatabaseConfig {
   user: string;
   password: string;
   database: string;
+}
+
+export interface AuthConfig {
+  jwtSecret: string;
+  jwtExpiresIn: string;
 }
 
 export function loadConfig(): AppConfig {
@@ -28,6 +34,10 @@ export function loadConfig(): AppConfig {
       user: process.env.DB_USER ?? 'root',
       password: process.env.DB_PASSWORD ?? 'root',
       database: process.env.DB_NAME ?? 'knowledge_base',
+    },
+    auth: {
+      jwtSecret: process.env.JWT_SECRET ?? 'development-only-change-me',
+      jwtExpiresIn: process.env.JWT_EXPIRES_IN ?? '1h',
     },
   };
 }

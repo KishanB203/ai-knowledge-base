@@ -62,3 +62,157 @@ textarea {
   font-weight: 700;
   text-transform: uppercase;
 }
+
+.login-page {
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+  padding: 24px;
+  background: #ffffff;
+}
+
+.login-form {
+  width: min(100%, 360px);
+}
+
+.login-copy {
+  margin-bottom: 18px;
+  text-align: center;
+}
+
+.login-copy h1 {
+  margin: 0 0 8px;
+  color: #286f8a;
+  font-size: 26px;
+  line-height: 1.2;
+}
+
+.login-copy p {
+  margin: 0;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.field {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 14px;
+  color: #4b5563;
+  font-size: 13px;
+}
+
+.field input {
+  min-height: 34px;
+  border: 1px solid #d8e2e7;
+  border-radius: 2px;
+  padding: 7px 9px;
+  color: #1f2933;
+  background: #f8fbfc;
+}
+
+.field input:focus {
+  border-color: #69c5eb;
+  outline: 2px solid #c8effc;
+}
+
+.form-error {
+  margin: 0 0 12px;
+  color: #b42318;
+  font-size: 13px;
+}
+
+.primary-button {
+  width: 100%;
+  min-height: 36px;
+  border: 0;
+  border-radius: 2px;
+  color: #12323f;
+  background: #68c8ef;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.primary-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.kb-page {
+  min-height: 100vh;
+  background: #edf8fc;
+}
+
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #d8e2e7;
+  background: #ffffff;
+  padding: 14px 32px;
+}
+
+.top-bar nav {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: #4b5563;
+}
+
+.top-bar button {
+  border: 1px solid #d8e2e7;
+  border-radius: 6px;
+  background: #ffffff;
+  padding: 7px 12px;
+  cursor: pointer;
+}
+
+.welcome-panel {
+  padding: 38px 48px;
+}
+
+.welcome-panel h1 {
+  margin: 0 0 8px;
+  color: #102a43;
+  font-size: 24px;
+}
+
+.welcome-panel p {
+  color: #4b5563;
+}
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.category-grid article {
+  border: 1px solid #b9dff0;
+  border-radius: 6px;
+  background: #ffffff;
+  padding: 16px;
+}
+
+.category-grid h2 {
+  margin: 0 0 8px;
+  color: #102a43;
+  font-size: 18px;
+}
+
+.category-grid p {
+  margin: 0;
+  font-size: 14px;
+}
+
+@media (max-width: 760px) {
+  .category-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .welcome-panel {
+    padding: 28px 20px;
+  }
+}
