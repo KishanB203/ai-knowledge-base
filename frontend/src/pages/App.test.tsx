@@ -26,7 +26,7 @@ describe('App', () => {
     );
   });
 
-  it('logs in and shows the authenticated shell', async () => {
+  it('logs in and shows the authenticated knowledge base dashboard', async () => {
     vi.stubGlobal(
       'fetch',
       vi.fn().mockResolvedValue({
@@ -62,5 +62,102 @@ describe('App', () => {
       expect(screen.getByRole('heading', { name: /knowledge base/i })).toBeInTheDocument();
     });
     expect(screen.getByText(/signed in as admin/i)).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /policy/i })).toBeInTheDocument();
+  });
+
+  it('shows admin actions on the policy list', async () => {
+    localStorage.setItem(
+      'knowledgeBaseAuth',
+      JSON.stringify({
+        token: 'valid-token',
+        user: {
+          id: 'admin-001',
+          email: 'admin@knowledgebase.local',
+          username: 'admin',
+          role: 'Admin',
+          department: 'Management',
+          position: 'Manager',
+        },
+      }),
+    );
+
+    vi.stubGlobal(
+      'fetch',
+      vi.fn().mockResolvedValue({
+        ok: true,
+        json: async () => ({
+          success: true,
+          data: {
+            user: {
+              id: 'admin-001',
+              email: 'admin@knowledgebase.local',
+              username: 'admin',
+              role: 'Admin',
+              department: 'Management',
+              position: 'Manager',
+            },
+          },
+        }),
+      }),
+    );
+
+    render(<App />);
+
+    await waitFor(() => {
+      expect(screen.getByRole('button', { name: /policy/i })).toBeInTheDocument();
+    });
+
+    fireEvent.click(screen.getByRole('button', { name: /policy/i }));
+
+    expect(screen.getByRole('button', { name: /create policy/i })).toBeInTheDocument();
+    expect(screen.getAllByRole('button', { name: /copy url/i }).length).toBeGreaterThan(0);
+  });
+
+  it('hides admin actions for normal users on the policy list', async () => {
+    localStorage.setItem(
+      'knowledgeBaseAuth',
+      JSON.stringify({
+        token: 'valid-token',
+        user: {
+          id: 'user-001',
+          email: 'normal.user@knowledgebase.local',
+          username: 'normaluser',
+          role: 'Normal User',
+          department: 'Development',
+          position: 'Developer',
+        },
+      }),
+    );
+
+    vi.stubGlobal(
+      'fetch',
+      vi.fn().mockResolvedValue({
+        ok: true,
+        json: async () => ({
+          success: true,
+          data: {
+            user: {
+              id: 'user-001',
+              email: 'normal.user@knowledgebase.local',
+              username: 'normaluser',
+              role: 'Normal User',
+              department: 'Development',
+              position: 'Developer',
+            },
+          },
+        }),
+      }),
+    );
+
+    render(<App />);
+
+    await waitFor(() => {
+      expect(screen.getByRole('button', { name: /policy/i })).toBeInTheDocument();
+    });
+
+    fireEvent.click(screen.getByRole('button', { name: /policy/i }));
+
+    expect(screen.queryByRole('button', { name: /create policy/i })).not.toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: /copy url/i })).not.toBeInTheDocument();
   });
 });
